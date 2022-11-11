@@ -155,11 +155,8 @@ exports.createTycoon = async (req, res) => {
 }
 // Update 
 exports.updateTycoon = async (req, res) => {
-    // const hashedPassword = bcrypt.hashSync(req.body.password, 12)
     const updateData = {
         username: req.body.username,
-        // email: req.body.email,
-        // password: hashedPassword,
         profile_image: req.body.profile_image,
         status: req.body.status,
         no_of_shops_created: req.body.no_of_shops_created,
@@ -172,6 +169,24 @@ exports.updateTycoon = async (req, res) => {
             res.json(error.message)
         } else {
             res.send({data:result,message:"Updated Successfully"})
+        }
+    })
+}
+// Update Password
+exports.updateTycoonPassword = async (req, res) => {
+    const hashedPassword = bcrypt.hashSync(req.body.password, 12)
+    const updateData = {
+        email: req.body.email,
+        password: hashedPassword,
+    }
+    const options = {
+        new: true
+    }
+    tycoonModel.findByIdAndUpdate(req.body._id, updateData, options, (error, result) => {
+        if (error) {
+            res.json(error.message)
+        } else {
+            res.send({data:result,message:"Updated Password Successfully"})
         }
     })
 }
