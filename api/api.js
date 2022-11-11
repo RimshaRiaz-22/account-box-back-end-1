@@ -12,8 +12,7 @@ const Products = require('./Routes/Product')
 const Cashier = require('./Routes/Cashier')
 const ShopProducts = require('./Routes/ShopProduct')
 const ShopCashiers = require('./Routes/ShopCashier')
-
-
+const Inventory = require('./Routes/Inventory')
 
 
 
@@ -30,6 +29,8 @@ router.use('/product',Products);
 router.use('/cashier',Cashier);
 router.use('/shopProducts',ShopProducts);
 router.use('/shopCashiers',ShopCashiers);
+router.use('/inventory',Inventory);
+
 
 
 
