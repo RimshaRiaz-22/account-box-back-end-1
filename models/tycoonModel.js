@@ -5,7 +5,10 @@ const tycoonSchema = new mongoose.Schema({
     password: String,
     username: String,
     profile_image: String,
-    status: String,
+    status: {
+        type: String,
+        enum: ['block', 'unblock']
+    },
     no_of_shops_created: String,
     created_at: String,
 
