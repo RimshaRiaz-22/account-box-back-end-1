@@ -32,7 +32,7 @@ exports.getTycoonShops = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }).sort({ $natural: -1 })
 }
 // Get Manager Shops 
 exports.getManagerShops = (req, res) => {
@@ -43,7 +43,7 @@ exports.getManagerShops = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }).sort({ $natural: -1 })
 }
 // Delete 
 exports.deleteShop = (req, res) => {
