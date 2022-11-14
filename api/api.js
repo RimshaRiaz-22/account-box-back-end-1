@@ -15,6 +15,8 @@ const ShopCashiers = require('./Routes/ShopCashier')
 const Inventory = require('./Routes/Inventory')
 const daily_Assigned_fund = require('./Routes/daily_Assigned_fundRoute')
 const expenses = require('./Routes/expenses')
+const balance_account = require('./Routes/balance_account')
+
 
 
 /*********Main Api**********/
@@ -32,6 +34,8 @@ router.use('/shopCashiers',ShopCashiers);
 router.use('/inventory',Inventory);
 router.use('/daily_Assigned_fund',daily_Assigned_fund);
 router.use('/expenses',expenses);
+router.use('/balance_account',balance_account);
+
 
 
 

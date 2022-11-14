@@ -1,7 +1,6 @@
 const expensesModel = require("../models/expensesModel");
 const mongoose = require("mongoose");
 const moment = require('moment');
-const managersModel = require("../models/managersModel");
 const shopsModel = require("../models/shopsModel");
 
 // Get All expense 
