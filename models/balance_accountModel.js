@@ -22,7 +22,7 @@ const balance_accountSchema = new mongoose.Schema({
     }],
     expenses_amount:String,
     shortage_status: Boolean,
-    amount: String,
+    shortage_amount: String,
     date: String,
 }
 );

@@ -35,7 +35,7 @@ exports.getAllBalanceAccountByShopId = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    }).sort({date: 'desc'})
+    }).sort({ date: 'desc' })
 }
 
 // Delete 
@@ -91,15 +91,26 @@ exports.createbalance_account = async (req, res) => {
                                                     sum += parseInt(result[i].amount)
                                                 }
                                                 // Calculate Sum of all Expenses  + Cash Balance  + Admin Balance
-                                                const Total_amount_included = sum + parseInt(req.body.cash_balance) + parseInt(req.body.admin_balance)
+                                                // const Total_amount_included = sum + parseInt(req.body.cash_balance) + parseInt(req.body.admin_balance)
                                                 // Check Shortage 
-                                                var shortage_status = false
-                                                if (Total_amount_included == AmountDailyAssignedFund) {
-                                                    shortage_status = false
+                                                // var shortage_status = req.body.shortage_status;
+                                                // const shortage_status=req.body.shortage_status
+                                                let shortage_amount = 0;
+                                                if (req.body.shortage_status === true) {
+                                                    // shortage_status = false
+                                                    shortage_amount = req.body.shortage_amount;
+                                                    console.log("shortage_amountdfdf")
 
                                                 } else {
-                                                    shortage_status = true
+                                                    // shortage_status = true
+                                                    shortage_amount = 0;
+                                                    console.log("shortage_amount")
+
+
                                                 }
+
+                                                console.log(shortage_amount)
+
                                                 // Creating Balance Amount 
 
                                                 const balance_account = new balance_accountModel({
@@ -111,8 +122,8 @@ exports.createbalance_account = async (req, res) => {
                                                     cash_balance: req.body.cash_balance,
                                                     admin_balance: req.body.admin_balance,
                                                     expenses_amount: sum,
-                                                    shortage_status: shortage_status,
-                                                    amount: Total_amount_included,
+                                                    shortage_status: req.body.shortage_status,
+                                                    shortage_amount: shortage_amount,
                                                     date: moment(Createddate).format("DD/MM/YYYY")
 
                                                 });
@@ -161,11 +172,11 @@ exports.createbalance_account = async (req, res) => {
 
 
 }
-// Update 
+// Update Shortage Status
 exports.updatebalance_account = async (req, res) => {
     const updateData = {
-        reason_of_amount: req.body.reason_of_amount,
-        amount: req.body.amount,
+        shortage_status: req.body.shortage_status,
+        shortage_amount: req.body.shortage_amount,
     }
     const options = {
         new: true
