@@ -19,6 +19,9 @@ const balance_account = require('./Routes/balance_account')
 const turnovers = require('./Routes/turnoversRoute')
 const winnings = require('./Routes/winningsRoute')
 const daily_reporting = require('./Routes/daily_reporting')
+const debt = require('./Routes/debts')
+const debts_recovery = require('./Routes/debts_recovery')
+
 
 
 
@@ -44,6 +47,9 @@ router.use('/balance_account',balance_account);
 router.use('/turnovers',turnovers);
 router.use('/winnings',winnings);
 router.use('/daily_reporting',daily_reporting);
+router.use('/debts',debt);
+router.use('/debts_recovery',debts_recovery);
+
 
 
 
