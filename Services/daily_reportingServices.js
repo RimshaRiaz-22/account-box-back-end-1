@@ -13,6 +13,7 @@ exports.getAlldaily_reportings = (req, res) => {
         }
     }).sort({ $natural: -1 })
     .populate('manager_id')
+    .populate('shop_id')
     .populate('balance_account_id')
     .populate({
         path: 'balance_account_id',
@@ -42,6 +43,7 @@ exports.getSpecificdaily_reporting = (req, res) => {
             res.json(err)
         }
     }) .populate('manager_id')
+    .populate('shop_id')
     .populate('balance_account_id')
     .populate({
         path: 'balance_account_id',
@@ -69,7 +71,25 @@ exports.getFundsByShopId = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }).populate('manager_id')
+    .populate('shop_id')
+    .populate('balance_account_id')
+    .populate({
+        path: 'balance_account_id',
+        populate: {
+          path: 'daily_assigned_fund_id',
+          model: 'daily_Assigned_fund',
+        }
+      })
+      .populate({
+        path: 'balance_account_id',
+        populate: {
+          path: 'expenses_id',
+          model: 'expenses',
+        }
+      })
+    .populate('turnover_id')
+    .populate('winning_id')
 }
 // Get daily_reports by date
 exports.getFundsByDate = (req, res) => {
@@ -80,7 +100,25 @@ exports.getFundsByDate = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }).populate('manager_id')
+    .populate('shop_id')
+    .populate('balance_account_id')
+    .populate({
+        path: 'balance_account_id',
+        populate: {
+          path: 'daily_assigned_fund_id',
+          model: 'daily_Assigned_fund',
+        }
+      })
+      .populate({
+        path: 'balance_account_id',
+        populate: {
+          path: 'expenses_id',
+          model: 'expenses',
+        }
+      })
+    .populate('turnover_id')
+    .populate('winning_id')
 }
 // Get daily_reports by date and shop_id
 exports.getFundsByDateAndShopId = (req, res) => {
@@ -91,7 +129,25 @@ exports.getFundsByDateAndShopId = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }).populate('manager_id')
+    .populate('shop_id')
+    .populate('balance_account_id')
+    .populate({
+        path: 'balance_account_id',
+        populate: {
+          path: 'daily_assigned_fund_id',
+          model: 'daily_Assigned_fund',
+        }
+      })
+      .populate({
+        path: 'balance_account_id',
+        populate: {
+          path: 'expenses_id',
+          model: 'expenses',
+        }
+      })
+    .populate('turnover_id')
+    .populate('winning_id')
 }
 
 // Delete 

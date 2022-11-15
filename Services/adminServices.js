@@ -35,13 +35,42 @@ exports.loginAdmin = (req, res) => {
         } else {
             if (result) {
                 if (bcrypt.compareSync(req.body.password, result.password)) {
-                    res.json({data:result,message:"Found Successfully"})
+                    const updateData = {
+                        isLogin:true
+                    }
+                    const options = {
+                        new: true
+                    }
+                    adminModel.findByIdAndUpdate(result._id, updateData, options, (error, result) => {
+                        if (error) {
+                            res.json(error.message)
+                        } else {
+                            res.json({data:result,message:"Login Successfully"})
+                        }
+                    })
+
                 } else {
                     res.json({message:"Invalid Password"})
                 }
             } else {
                 res.json({message:"Email Not Found"})
             }
+        }
+    })
+}
+// Update 
+exports.logoutAdmin = async (req, res) => {
+    const updateData = {
+        isLogin:false
+    }
+    const options = {
+        new: true
+    }
+    adminModel.findByIdAndUpdate(req.body._id, updateData, options, (error, result) => {
+        if (error) {
+            res.json(error.message)
+        } else {
+            res.send({data:result,message:"Logout Successfully"})
         }
     })
 }
@@ -130,7 +159,7 @@ exports.createadmin = async (req, res) => {
                     img: req.body.img,
                     privacy_policy: req.body.privacy_policy,
                     terms_and_conditions: req.body.terms_and_conditions,
-
+                    isLogin:false
                 });
                 admin.save((error, result) => {
                     if (error) {

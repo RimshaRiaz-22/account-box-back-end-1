@@ -37,13 +37,42 @@ exports.loginTycoon = (req, res) => {
         } else {
             if (result) {
                 if (bcrypt.compareSync(req.body.password, result.password)) {
-                    res.json({data:result,message:"Found Successfully"})
+                    // res.json({data:result,message:"Found Successfully"})
+                    const updateData = {
+                        isLogin:true
+                    }
+                    const options = {
+                        new: true
+                    }
+                    tycoonModel.findByIdAndUpdate(result._id, updateData, options, (error, result) => {
+                        if (error) {
+                            res.json(error.message)
+                        } else {
+                            res.json({data:result,message:"Login Successfully"})
+                        }
+                    })
                 } else {
                     res.json({message:"Invalid Password"})
                 }
             } else {
                 res.json({message:"Email Not Found"})
             }
+        }
+    })
+}
+// Logout 
+exports.logoutTycoon = async (req, res) => {
+    const updateData = {
+        isLogin:false
+    }
+    const options = {
+        new: true
+    }
+    tycoonModel.findByIdAndUpdate(req.body._id, updateData, options, (error, result) => {
+        if (error) {
+            res.json(error.message)
+        } else {
+            res.send({data:result,message:"Logout Successfully"})
         }
     })
 }
@@ -134,7 +163,8 @@ exports.createTycoon = async (req, res) => {
                     profile_image: req.body.profile_image,
                     status: req.body.status,
                     no_of_shops_created: req.body.no_of_shops_created,
-                    created_at:moment(Createddate).format("DD/MM/YYYY")
+                    created_at:moment(Createddate).format("DD/MM/YYYY"),
+                    isLogin:false
 
                 });
                 Tycoon.save((error, result) => {

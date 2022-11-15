@@ -11,6 +11,9 @@ exports.getAlldaily_assigned_funds = (req, res) => {
             res.send(result)
         }
     }).sort({ $natural: -1 })
+    .populate('tycoon_id')
+    .populate('shop_id')
+
 }
 // Get daily_assigned_fund 
 exports.getSpecificdaily_assigned_fund = (req, res) => {
@@ -21,7 +24,8 @@ exports.getSpecificdaily_assigned_fund = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }) .populate('tycoon_id')
+    .populate('shop_id')
 }
 // Get daily_assigned_fund by Tycoon Id
 exports.getFundsByTycoonId = (req, res) => {
@@ -32,7 +36,8 @@ exports.getFundsByTycoonId = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }) .populate('tycoon_id')
+    .populate('shop_id')
 }
 // Get daily_assigned_fund by shop Id
 exports.getFundsByShopId = (req, res) => {
@@ -43,7 +48,8 @@ exports.getFundsByShopId = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }) .populate('tycoon_id')
+    .populate('shop_id')
 }
 
 // Delete 

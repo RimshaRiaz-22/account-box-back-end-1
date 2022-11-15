@@ -12,6 +12,11 @@ exports.getAllturnovers = (req, res) => {
             res.send(result)
         }
     }).sort({ $natural: -1 })
+    .populate('manager_id')
+    .populate('shop_id')
+    .populate('product_id')
+    .populate('cashier_id')
+
 }
 // Get turnover 
 exports.getSpecificturnover = (req, res) => {
@@ -22,7 +27,10 @@ exports.getSpecificturnover = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }).populate('manager_id')
+    .populate('shop_id')
+    .populate('product_id')
+    .populate('cashier_id')
 }
 // Get turnover by shop Id
 exports.getTurnoverByShopId = (req, res) => {
@@ -33,7 +41,10 @@ exports.getTurnoverByShopId = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }).populate('manager_id')
+    .populate('shop_id')
+    .populate('product_id')
+    .populate('cashier_id')
 }
 // Get turnover by date
 exports.getTurnoverByDate = (req, res) => {
@@ -44,7 +55,10 @@ exports.getTurnoverByDate = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }).populate('manager_id')
+    .populate('shop_id')
+    .populate('product_id')
+    .populate('cashier_id')
 }
 // Get turnover by date and product Id
 exports.getTurnoverByDateAndProductId = (req, res) => {
@@ -56,7 +70,10 @@ exports.getTurnoverByDateAndProductId = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }).populate('manager_id')
+    .populate('shop_id')
+    .populate('product_id')
+    .populate('cashier_id')
 }
 
 // Delete 

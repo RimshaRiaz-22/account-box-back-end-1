@@ -12,6 +12,9 @@ exports.getAllexpenses = (req, res) => {
             res.send(result)
         }
     }).sort({ $natural: -1 })
+    .populate('manager_id')
+    .populate('shop_id')
+    
 }
 // Get expense 
 exports.getSpecificexpense = (req, res) => {
@@ -22,7 +25,8 @@ exports.getSpecificexpense = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    })  .populate('manager_id')
+    .populate('shop_id')
 }
 // Get expense by shop Id
 exports.getFundsByShopId = (req, res) => {
@@ -33,7 +37,20 @@ exports.getFundsByShopId = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    })  .populate('manager_id')
+    .populate('shop_id')
+}
+// Get expense by Date
+exports.getFundsByDate = (req, res) => {
+    const Createddate = req.params.created_at;
+    expensesModel.find({ created_at: moment(Createddate).format("DD/MM/YYYY") }, function (err, foundResult) {
+        try {
+            res.json({ data: foundResult,count:foundResult.length })
+        } catch (err) {
+            res.json(err)
+        }
+    })  .populate('manager_id')
+    .populate('shop_id')
 }
 
 // Delete 

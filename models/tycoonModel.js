@@ -11,6 +11,7 @@ const tycoonSchema = new mongoose.Schema({
     },
     no_of_shops_created: String,
     created_at: String,
+    isLogin:Boolean
 
 }
 );

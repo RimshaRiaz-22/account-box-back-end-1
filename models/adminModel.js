@@ -6,7 +6,8 @@ const adminSchema = new mongoose.Schema({
     password: String,
     img: String,
     privacy_policy:String,
-    terms_and_conditions:String
+    terms_and_conditions:String,
+    isLogin:Boolean
 }
 );
 module.exports = mongoose.model("admin", adminSchema);
