@@ -5,6 +5,8 @@ const router = express.Router();
 const ImageUpload = require('./Routes/ImageUpload')
 const Admin = require('./Routes/Admin')
 const SubscriptionPlan = require('./Routes/SubscriptionPlan')
+const subscription_history = require('./Routes/subscription_history')
+
 const Tycoon = require('./Routes/Tycoon')
 const Managers = require('./Routes/Managers')
 const Shop = require('./Routes/Shops')
@@ -28,11 +30,14 @@ const debts_recovery = require('./Routes/debts_recovery')
 
 
 
+
 /*********Main Api**********/
 
 router.use('/Upload', ImageUpload);
 router.use('/admin',Admin);
 router.use('/subscriptionPlan',SubscriptionPlan);
+router.use('/subscription_history',subscription_history);
+
 router.use('/tycoon',Tycoon);
 router.use('/managers',Managers);
 router.use('/shop',Shop);
