@@ -25,9 +25,32 @@ exports.getSpecificturnover = (req, res) => {
     })
 }
 // Get turnover by shop Id
-exports.getFundsByShopId = (req, res) => {
+exports.getTurnoverByShopId = (req, res) => {
     const ShopId = req.params.shop_id;
     turnoversModel.find({ shop_id: ShopId }, function (err, foundResult) {
+        try {
+            res.json({ data: foundResult,count:foundResult.length })
+        } catch (err) {
+            res.json(err)
+        }
+    })
+}
+// Get turnover by date
+exports.getTurnoverByDate = (req, res) => {
+    const Createddate = req.params.created_at;
+    turnoversModel.find({ created_at: moment(Createddate).format("DD/MM/YYYY") }, function (err, foundResult) {
+        try {
+            res.json({ data: foundResult,count:foundResult.length })
+        } catch (err) {
+            res.json(err)
+        }
+    })
+}
+// Get turnover by date and product Id
+exports.getTurnoverByDateAndProductId = (req, res) => {
+    const Createddate = req.body.created_at;
+    const productId = req.body.product_id;
+    turnoversModel.find({ product_id:productId,created_at: moment(Createddate).format("DD/MM/YYYY") }, function (err, foundResult) {
         try {
             res.json({ data: foundResult,count:foundResult.length })
         } catch (err) {
