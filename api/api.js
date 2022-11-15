@@ -23,6 +23,7 @@ const winnings = require('./Routes/winningsRoute')
 const daily_reporting = require('./Routes/daily_reporting')
 const debt = require('./Routes/debts')
 const debts_recovery = require('./Routes/debts_recovery')
+const notification = require('./Routes/notification')
 
 
 
@@ -54,6 +55,8 @@ router.use('/winnings',winnings);
 router.use('/daily_reporting',daily_reporting);
 router.use('/debts',debt);
 router.use('/debts_recovery',debts_recovery);
+router.use('/notification',notification);
+
 
 
 
