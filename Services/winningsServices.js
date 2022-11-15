@@ -25,7 +25,7 @@ exports.getSpecificwinning = (req, res) => {
     })
 }
 // Get winning by shop Id
-exports.getFundsByShopId = (req, res) => {
+exports.getWinningsByShopId = (req, res) => {
     const ShopId = req.params.shop_id;
     winningModel.find({ shop_id: ShopId }, function (err, foundResult) {
         try {
@@ -35,7 +35,17 @@ exports.getFundsByShopId = (req, res) => {
         }
     })
 }
-
+// Get turnover by date
+exports.getWinningsByDate = (req, res) => {
+    const Createddate = req.params.created_at;
+    winningModel.find({ created_at: moment(Createddate).format("DD/MM/YYYY") }, function (err, foundResult) {
+        try {
+            res.json({ data: foundResult,count:foundResult.length })
+        } catch (err) {
+            res.json(err)
+        }
+    })
+}
 // Delete 
 exports.deletewinning = (req, res) => {
     const winningId = req.params.winningsId;
