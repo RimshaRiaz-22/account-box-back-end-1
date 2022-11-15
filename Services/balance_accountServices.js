@@ -14,6 +14,12 @@ exports.getAllbalance_accounts = (req, res) => {
             res.send(result)
         }
     }).sort({ $natural: -1 })
+    .populate('daily_assigned_fund_id')
+    .populate('shop_id')
+    .populate('manager_id')
+    .populate('expenses_id')
+
+
 }
 // Get balance_account 
 exports.getSpecificbalance_account = (req, res) => {
@@ -24,7 +30,10 @@ exports.getSpecificbalance_account = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }).populate('daily_assigned_fund_id')
+    .populate('shop_id')
+    .populate('manager_id')
+    .populate('expenses_id')
 }
 // Get balance_account by shop Id
 exports.getAllBalanceAccountByShopId = (req, res) => {
@@ -36,6 +45,24 @@ exports.getAllBalanceAccountByShopId = (req, res) => {
             res.json(err)
         }
     }).sort({ date: 'desc' })
+    .populate('daily_assigned_fund_id')
+    .populate('shop_id')
+    .populate('manager_id')
+    .populate('expenses_id')
+}
+// Get balance_account by shop Id
+exports.getAllBalanceAccountByDate = (req, res) => {
+    const DateData = req.params.date;
+    balance_accountModel.find({ date: moment(DateData).format("DD/MM/YYYY") }, function (err, foundResult) {
+        try {
+            res.json({ data: foundResult, count: foundResult.length })
+        } catch (err) {
+            res.json(err)
+        }
+    }).populate('daily_assigned_fund_id')
+    .populate('shop_id')
+    .populate('manager_id')
+    .populate('expenses_id')
 }
 
 // Delete 

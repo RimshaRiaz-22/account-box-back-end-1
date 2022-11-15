@@ -12,6 +12,8 @@ exports.getAllwinnings = (req, res) => {
             res.send(result)
         }
     }).sort({ $natural: -1 })
+    .populate('manager_id')
+    .populate('shop_id')
 }
 // Get winning 
 exports.getSpecificwinning = (req, res) => {
@@ -22,7 +24,8 @@ exports.getSpecificwinning = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    })  .populate('manager_id')
+    .populate('shop_id')
 }
 // Get winning by shop Id
 exports.getWinningsByShopId = (req, res) => {
@@ -33,7 +36,8 @@ exports.getWinningsByShopId = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    })  .populate('manager_id')
+    .populate('shop_id')
 }
 // Get turnover by date
 exports.getWinningsByDate = (req, res) => {
@@ -44,7 +48,8 @@ exports.getWinningsByDate = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    })  .populate('manager_id')
+    .populate('shop_id')
 }
 // Delete 
 exports.deletewinning = (req, res) => {

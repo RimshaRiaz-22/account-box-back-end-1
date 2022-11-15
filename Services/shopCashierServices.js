@@ -11,6 +11,8 @@ exports.getAllShopCashiers = (req, res) => {
             res.send(result)
         }
     }).sort({ $natural: -1 })
+    .populate('shop_id')
+    .populate('cashier_id')
 }
 // Get ShopCashier 
 exports.getSpecificShopCashier = (req, res) => {
@@ -21,7 +23,8 @@ exports.getSpecificShopCashier = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }) .populate('shop_id')
+    .populate('cashier_id')
 }
 // Get SingleShopProduct 
 exports.getSingleShopProduct = (req, res) => {
@@ -32,7 +35,8 @@ exports.getSingleShopProduct = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }) .populate('shop_id')
+    .populate('cashier_id')
 }
 
 // Delete 

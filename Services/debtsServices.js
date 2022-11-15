@@ -11,6 +11,7 @@ exports.getAlldebts = (req, res) => {
             res.send(result)
         }
     }).sort({ $natural: -1 })
+    .populate('shop_id')
 }
 // Get debt 
 exports.getSpecificdebt = (req, res) => {
@@ -21,7 +22,7 @@ exports.getSpecificdebt = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }).populate('shop_id')
 }
 // Get Shop debt 
 exports.getShopdebt = (req, res) => {
@@ -32,7 +33,7 @@ exports.getShopdebt = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }).populate('shop_id')
 }
 // Get Shop and date debt 
 exports.getShopdebtAndDate = (req, res) => {
@@ -43,7 +44,7 @@ exports.getShopdebtAndDate = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }).populate('shop_id')
 }
 // Get Status debt 
 exports.getShopdebtStatus = (req, res) => {
@@ -54,7 +55,7 @@ exports.getShopdebtStatus = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }).populate('shop_id')
 }
 
 

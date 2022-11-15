@@ -7,7 +7,7 @@ const expensesSchema = new mongoose.Schema({
     },
     manager_id:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'tycoon'
+        ref: 'managers'
     },
     reason_of_amount: String,
     amount: String,

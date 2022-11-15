@@ -12,6 +12,8 @@ exports.getAlldebts_recovery = (req, res) => {
             res.send(result)
         }
     }).sort({ $natural: -1 })
+    .populate('shop_id')
+    .populate('debt_id')
 }
 // Get debt 
 exports.getSpecificdebt_recovery = (req, res) => {
@@ -22,7 +24,8 @@ exports.getSpecificdebt_recovery = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }).populate('shop_id')
+    .populate('debt_id')
 }
 // Get DebtsRecovery By debt 
 exports.getShopdebt_recovery = (req, res) => {
@@ -33,7 +36,8 @@ exports.getShopdebt_recovery = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }).populate('shop_id')
+    .populate('debt_id')
 }
 // Get debt recovery by shopId 
 exports.getDebtRecoveryByShopId = (req, res) => {
@@ -44,7 +48,8 @@ exports.getDebtRecoveryByShopId = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }).populate('shop_id')
+    .populate('debt_id')
 }
 // Get debt recovery by recoveryDate 
 exports.getDebtRecoveryByRecoveryDate = (req, res) => {
@@ -55,7 +60,8 @@ exports.getDebtRecoveryByRecoveryDate = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }).populate('shop_id')
+    .populate('debt_id')
 }
 
 // Delete 

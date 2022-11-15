@@ -11,6 +11,8 @@ exports.getAllShops = (req, res) => {
             res.send(result)
         }
     }).sort({ $natural: -1 })
+    .populate('manager_id')
+    .populate('tycoon_id')
 }
 // Get Shop 
 exports.getSpecificShop = (req, res) => {
@@ -21,7 +23,8 @@ exports.getSpecificShop = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }).populate('manager_id')
+    .populate('tycoon_id')
 }
 // Get Tycoon Shops 
 exports.getTycoonShops = (req, res) => {
@@ -33,6 +36,8 @@ exports.getTycoonShops = (req, res) => {
             res.json(err)
         }
     }).sort({ $natural: -1 })
+    .populate('manager_id')
+    .populate('tycoon_id')
 }
 // Get Manager Shops 
 exports.getManagerShops = (req, res) => {
@@ -44,6 +49,8 @@ exports.getManagerShops = (req, res) => {
             res.json(err)
         }
     }).sort({ $natural: -1 })
+    .populate('manager_id')
+    .populate('tycoon_id')
 }
 // Delete 
 exports.deleteShop = (req, res) => {

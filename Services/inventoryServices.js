@@ -11,6 +11,8 @@ exports.getAllInventorys = (req, res) => {
             res.send(result)
         }
     }).sort({ $natural: -1 })
+    .populate('shop_id')
+    .populate('manager_id')
 }
 // Get Inventory 
 exports.getSpecificInventory = (req, res) => {
@@ -21,7 +23,8 @@ exports.getSpecificInventory = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }) .populate('shop_id')
+    .populate('manager_id')
 }
 // Get Shop Inventory 
 exports.getShopInventory = (req, res) => {
@@ -32,7 +35,8 @@ exports.getShopInventory = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }) .populate('shop_id')
+    .populate('manager_id')
 }
 
 // Delete 
