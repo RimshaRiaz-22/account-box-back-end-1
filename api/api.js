@@ -5,6 +5,8 @@ const router = express.Router();
 const ImageUpload = require('./Routes/ImageUpload')
 const Admin = require('./Routes/Admin')
 const SubscriptionPlan = require('./Routes/SubscriptionPlan')
+const subscription_history = require('./Routes/subscription_history')
+
 const Tycoon = require('./Routes/Tycoon')
 const Managers = require('./Routes/Managers')
 const Shop = require('./Routes/Shops')
@@ -19,6 +21,10 @@ const balance_account = require('./Routes/balance_account')
 const turnovers = require('./Routes/turnoversRoute')
 const winnings = require('./Routes/winningsRoute')
 const daily_reporting = require('./Routes/daily_reporting')
+const debt = require('./Routes/debts')
+const debts_recovery = require('./Routes/debts_recovery')
+
+
 
 
 
@@ -30,6 +36,8 @@ const daily_reporting = require('./Routes/daily_reporting')
 router.use('/Upload', ImageUpload);
 router.use('/admin',Admin);
 router.use('/subscriptionPlan',SubscriptionPlan);
+router.use('/subscription_history',subscription_history);
+
 router.use('/tycoon',Tycoon);
 router.use('/managers',Managers);
 router.use('/shop',Shop);
@@ -44,6 +52,9 @@ router.use('/balance_account',balance_account);
 router.use('/turnovers',turnovers);
 router.use('/winnings',winnings);
 router.use('/daily_reporting',daily_reporting);
+router.use('/debts',debt);
+router.use('/debts_recovery',debts_recovery);
+
 
 
 
