@@ -10,7 +10,7 @@ exports.getAllsubscription_historys = (req, res) => {
         } else {
             res.send(result)
         }
-    }).sort({ $natural: -1 })
+    }).sort({ $natural: -1 }).populate('subscription_plans_id').populate('tycoon_id')
 }
 // Get subscription_history 
 exports.getSpecificsubscription_history = (req, res) => {
@@ -21,7 +21,7 @@ exports.getSpecificsubscription_history = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }).populate('subscription_plans_id').populate('tycoon_id')
 }
 // Get subscription_history by tycoon Id
 exports.getSpecificsubscription_historyByTycoon = (req, res) => {
@@ -32,7 +32,7 @@ exports.getSpecificsubscription_historyByTycoon = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    })
+    }).populate('subscription_plans_id')
 }
 // Delete 
 exports.deletesubscription_history = (req, res) => {

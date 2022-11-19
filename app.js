@@ -9,25 +9,38 @@ var bodyParser = require('body-parser')
 const userRoutes = require('./api/api');
 const globalErrHandler = require('./utils/errorController');
 const AppError = require('./utils/appError');
-const app = express();
-var Publishable_Key = process.env.Publishable_Key
-var Secret_Key = process.env.Secret_Key
-const stripe = require('stripe')(Secret_Key)
-app.use('/uploads', express.static('uploads'))
-//multer
 const upload = require('./utils/multer')
-app.use('/upload-image', require('./api/upload-image'))
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+const stripe = require('stripe')(Secret_Key)
+
+const app = express();
+
+
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
 // Allow Cross-Origin requests
-app.use(cors());
+// const corsOptions ={
+//   origin:'http://localhost:5000', 
+//   credentials:true,            //access-control-allow-credentials:true
+//   optionSuccessStatus:200
+// }
+// app.use(cors(corsOptions));
+app.use(cors({
+  methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
+}));
 
 // Set security HTTP headers
-app.use(helmet());
+app.use(helmet({
+  crossOriginResourcePolicy: false,
+}));
 
+var Publishable_Key = process.env.Publishable_Key
+var Secret_Key = process.env.Secret_Key
+
+app.use('/uploads', express.static('uploads'))
+//multer
+
+app.use('/upload-image', require('./api/upload-image'))
 // Limit request from the same API 
 const limiter = rateLimit({
     max: 150,
