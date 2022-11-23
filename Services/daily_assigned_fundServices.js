@@ -1,6 +1,7 @@
 const daily_assigned_fundModel = require("../models/daily_assigned_fund");
 const mongoose = require("mongoose");
 const moment = require('moment');
+const shopsModel = require("../models/shopsModel");
 
 // Get All daily_assigned_fund 
 exports.getAlldaily_assigned_funds = (req, res) => {
@@ -11,8 +12,8 @@ exports.getAlldaily_assigned_funds = (req, res) => {
             res.send(result)
         }
     }).sort({ $natural: -1 })
-    .populate('tycoon_id')
-    .populate('shop_id')
+        .populate('tycoon_id')
+        .populate('shop_id')
 
 }
 // Get daily_assigned_fund 
@@ -24,32 +25,32 @@ exports.getSpecificdaily_assigned_fund = (req, res) => {
         } catch (err) {
             res.json(err)
         }
-    }) .populate('tycoon_id')
-    .populate('shop_id')
+    }).populate('tycoon_id')
+        .populate('shop_id')
 }
 // Get daily_assigned_fund by Tycoon Id
 exports.getFundsByTycoonId = (req, res) => {
     const TycoonId = req.params.tycoon_id;
     daily_assigned_fundModel.find({ tycoon_id: TycoonId }, function (err, foundResult) {
         try {
-            res.json({ data: foundResult,count:foundResult.length })
+            res.json({ data: foundResult, count: foundResult.length })
         } catch (err) {
             res.json(err)
         }
-    }) .populate('tycoon_id')
-    .populate('shop_id')
+    }).populate('tycoon_id')
+        .populate('shop_id')
 }
 // Get daily_assigned_fund by shop Id
 exports.getFundsByShopId = (req, res) => {
     const ShopId = req.params.shop_id;
     daily_assigned_fundModel.find({ shop_id: ShopId }, function (err, foundResult) {
         try {
-            res.json({ data: foundResult,count:foundResult.length })
+            res.json({ data: foundResult, count: foundResult.length })
         } catch (err) {
             res.json(err)
         }
-    }) .populate('tycoon_id')
-    .populate('shop_id')
+    }).populate('tycoon_id')
+        .populate('shop_id')
 }
 
 // Delete 
@@ -65,28 +66,41 @@ exports.deletedaily_assigned_fund = (req, res) => {
 }
 // Create 
 exports.createdaily_assigned_fund = async (req, res) => {
-    const Createddate= req.body.date;
-    daily_assigned_fundModel.find({ tycoon_id: req.body.tycoon_id,shop_id: req.body.shop_id ,date:moment(Createddate).format("DD/MM/YYYY")}, (error, result) => {
+    const Createddate = req.body.date;
+    daily_assigned_fundModel.find({ tycoon_id: req.body.tycoon_id, shop_id: req.body.shop_id, date: moment(Createddate).format("DD/MM/YYYY") }, (error, result) => {
         if (error) {
             res.send(error)
         } else {
             // res.send(result)
             if (result === undefined || result.length == 0) {
-                const daily_assigned_fund = new daily_assigned_fundModel({
-                    _id: mongoose.Types.ObjectId(),
-                    tycoon_id: req.body.tycoon_id,
-                    shop_id: req.body.shop_id,
-                    amount: req.body.amount,
-                    date:moment(Createddate).format("DD/MM/YYYY")
-
-                });
-                daily_assigned_fund.save((error, result) => {
+                shopsModel.find({ tycoon_id: req.body.tycoon_id, _id: req.body.shop_id }, (error, result) => {
                     if (error) {
                         res.send(error)
                     } else {
-                        res.json({ data: result, message: "Created Successfully" })
+                        // res.send(result)
+                        if (result === undefined || result.length == 0) {
+                            res.json({ data: result, message: "No Tycoon Exist for this Shop Id" })
+
+                        } else {
+                            const daily_assigned_fund = new daily_assigned_fundModel({
+                                _id: mongoose.Types.ObjectId(),
+                                tycoon_id: req.body.tycoon_id,
+                                shop_id: req.body.shop_id,
+                                amount: req.body.amount,
+                                date: moment(Createddate).format("DD/MM/YYYY")
+
+                            });
+                            daily_assigned_fund.save((error, result) => {
+                                if (error) {
+                                    res.send(error)
+                                } else {
+                                    res.json({ data: result, message: "Created Successfully" })
+                                }
+                            })
+                        }
                     }
                 })
+
 
             } else {
                 res.json({ data: result, message: "daily_assigned_fund Already Exists for this Tycoon Id and Shop Id" })

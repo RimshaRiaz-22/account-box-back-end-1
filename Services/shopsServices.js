@@ -1,6 +1,7 @@
 const shopsModel = require("../models/shopsModel");
 const mongoose = require("mongoose");
 const moment = require('moment');
+const managersModel = require("../models/managersModel");
 
 // Get All Shop 
 exports.getAllShops = (req, res) => {
@@ -66,7 +67,7 @@ exports.deleteShop = (req, res) => {
 // Create 
 exports.createShop = async (req, res) => {
     const Createddate= req.body.created_at;
-    shopsModel.find({ name: req.body.name }, (error, result) => {
+    shopsModel.find({ manager_id: req.body.manager_id,tycoon_id:req.body.tycoon_id }, (error, result) => {
         if (error) {
             res.send(error)
         } else {
@@ -90,7 +91,7 @@ exports.createShop = async (req, res) => {
                 })
 
             } else {
-                res.json({ data: result, message: "Shop Already Exists for this name" })
+                res.json({ data: result, message: "Manager Already Exists for the shop" })
 
             }
         }
