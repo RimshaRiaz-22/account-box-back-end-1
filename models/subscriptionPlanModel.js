@@ -7,4 +7,4 @@ const subscriptionPlansSchema = new mongoose.Schema({
     is_free_trail: Boolean,
 }
 );
-module.exports = mongoose.model("subscription-plans", subscriptionPlansSchema);
+module.exports = mongoose.model("subscription_plans", subscriptionPlansSchema);
